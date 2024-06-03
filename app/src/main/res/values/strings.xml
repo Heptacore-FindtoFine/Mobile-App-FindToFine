@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FindToFine</string>
+    <string name="get_started">Get Started</string>
+    <string name="teks_description_welcome_page1">“Simplifies Luggage Management During Vacations”</string>
+    <string name="fast_secure_list_item"><![CDATA[Fast & Secure List Item]]></string>
+    <string name="can_be_anywhere_at_any_time">Can Be Anywhere At Any Time</string>
+    <string name="easy_to_use">Easy To Use</string>
+    <string name="back_arrow">‹</string>
+    <string name="next_arrow">Next ›</string>
 </resources>

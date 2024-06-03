@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.findtofine.databinding.ActivitySplashScreenBinding
+import com.example.findtofine.ui.welcomepage.WelcomeActivity
 import com.example.findtofine.ui.welcomepage.pages.Page1Activity
 
 @SuppressLint("CustomSplashScreen")
@@ -20,7 +21,7 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         Handler().postDelayed({
-            startActivity(Intent(this,Page1Activity::class.java))
+            startActivity(Intent(this,WelcomeActivity::class.java))
             finish()
         }, splashTimeOut)
 
