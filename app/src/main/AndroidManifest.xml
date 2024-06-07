@@ -13,6 +13,18 @@
         android:theme="@style/Theme.FindToFine"
         tools:targetApi="31">
         <activity
+            android:name=".ui.authpage.newpw.NewPwActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.authpage.verif.VerifActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.authpage.forgotpw.ForgotPwActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.authpage.register.RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.authpage.login.LoginActivity"
             android:exported="false" />
         <activity
