@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.findtofine.MainActivity
 import com.example.findtofine.R
 import com.example.findtofine.databinding.ActivityWelcomeBinding
+import com.example.findtofine.ui.authpage.login.LoginActivity
 import com.google.android.material.button.MaterialButton
 
 class WelcomeActivity : AppCompatActivity() {
@@ -54,7 +55,7 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
         binding.btnGetStarted.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }

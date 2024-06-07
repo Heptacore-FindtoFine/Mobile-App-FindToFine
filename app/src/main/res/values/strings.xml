@@ -7,4 +7,16 @@
     <string name="easy_to_use">Easy To Use</string>
     <string name="back_arrow">‹</string>
     <string name="next_arrow">Next ›</string>
+    <string name="welcome_back_to">Welcome Back to</string>
+    <string name="enter_your_email_and_password_to_log_in">Enter your email and password to log in</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="log_in">Log In</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="or">Or</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="don_t_have_an_account">Don’t have an account?</string>
+    <string name="continue_with_facebook">Continue with Facebook</string>
+    <string name="continue_with_google">Continue with Google</string>
 </resources>
