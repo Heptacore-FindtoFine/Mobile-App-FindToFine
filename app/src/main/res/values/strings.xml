@@ -98,4 +98,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile_Pgede">Profile</string>
     <string name="more">More</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="examplename">examplename</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="welcome_to">Welcome To</string>
+    <string name="subtitle_welcome">FindToFine is your ultimate travel companion designed to simplify luggage management and enhance your vacation planning experience. We understand that organizing your belongings for a trip can be stressful and time-consuming. That\'s why we\'ve developed FindToFine, a mobile application that streamlines the process of cataloging your holiday luggage with ease and efficiency.</string>
+    <string name="title_activity_detail_history">DetailHistoryActivity</string>
 </resources>
