@@ -89,4 +89,13 @@
     <string name="congratulations">Congratulations</string>
     <string name="your_account_is_ready_to_use">Your account is ready to use</string>
     <string name="let_s_travel">Let\'s Travel</string>
+    <string name="add">add</string>
+    <string name="home">home</string>
+    <string name="history">history</string>
+    <string name="guide">guide</string>
+    <string name="profile">profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile_Pgede">Profile</string>
+    <string name="more">More</string>
 </resources>

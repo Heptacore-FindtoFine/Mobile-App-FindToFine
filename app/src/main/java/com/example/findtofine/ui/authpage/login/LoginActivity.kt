@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.Window
+import com.example.findtofine.MainActivity
 import com.example.findtofine.R
 import com.example.findtofine.databinding.ActivityLoginBinding
 import com.example.findtofine.databinding.NotifCustomLoginBinding
@@ -44,6 +45,9 @@ class LoginActivity : AppCompatActivity() {
 
         dialogBinding.btnTravel.setOnClickListener {
             // Handle button click
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
             dialog.dismiss()
         }
 

@@ -13,6 +13,12 @@
         android:theme="@style/Theme.FindToFine"
         tools:targetApi="31">
         <activity
+            android:name=".ui.navbar.profile.editprofile.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.mainfeature.mf1.MainFeature1Activity"
+            android:exported="false" />
+        <activity
             android:name=".ui.authpage.newpw.NewPwActivity"
             android:exported="false" />
         <activity
