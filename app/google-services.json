@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "469810681034",
+    "project_id": "auht-findtofine",
+    "storage_bucket": "auht-findtofine.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:469810681034:android:9aafa70b7f2f37568f5033",
+        "android_client_info": {
+          "package_name": "com.example.findtofine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "469810681034-60nj0sgl97ngi46t84ennq7pap3q6fbp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.findtofine",
+            "certificate_hash": "4460236d56ebec8f3e27dadc217f7e87b442a35b"
+          }
+        },
+        {
+          "client_id": "469810681034-uk7r4atmtv0jd7t1u0iu9m8vetdbgr65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbIsHa2saRK44276dXco88nfqnmknR53E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "469810681034-uk7r4atmtv0jd7t1u0iu9m8vetdbgr65.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,6 +7,7 @@ import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 import com.example.findtofine.MainActivity
 import com.example.findtofine.R
+import com.example.findtofine.data.pref.SharedPrefManager
 import com.example.findtofine.databinding.ActivityWelcomeBinding
 import com.example.findtofine.ui.authpage.login.LoginActivity
 import com.google.android.material.button.MaterialButton
@@ -18,6 +19,10 @@ class WelcomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if(SharedPrefManager.isLoggedIn(this)){
+            navigateToMain()
+        }
 
         val layouts = listOf(
             R.layout.activity_page1,
@@ -59,5 +64,11 @@ class WelcomeActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun navigateToMain(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

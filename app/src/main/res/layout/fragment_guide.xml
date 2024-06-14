@@ -1,14 +1,279 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.navbar.guide.GuideFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="ini guide" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_to"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvFindToFine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="@string/app_name"
+            android:textColor="@color/hijau2"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWelcome" />
+
+        <TextView
+            android:id="@+id/tvSubtitleWelcome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/guide_sub1"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
+            android:maxLines="9"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFindToFine"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:id="@+id/ivGambar1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/gambar_guide1"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubtitleWelcome"/>
+
+        <TextView
+            android:id="@+id/tvStep1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Step 1: Create a New Trip"
+            android:textColor="@color/hijau2"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivGambar1" />
+
+        <TextView
+            android:id="@+id/tvStep1Sub1"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:text=" • Start a Trip: Click on the (+) button. Enter the name of your trip, destination, and travel dates."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep1"/>
+        <TextView
+            android:id="@+id/tvStep1Sub2"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text=" • Save Trip Details: Click Save to store your trip information."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep1Sub1"/>
+
+        <TextView
+            android:id="@+id/tvStep2"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="Step 2: Add Items to Your Luggage List"
+            android:textColor="@color/hijau2"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep1Sub2" />
+        <TextView
+            android:id="@+id/tvStep2Sub1"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:text="Capture Photos: Click on the Add Items button and use your phone’s camera to take photos of your luggage items."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep2"/>
+        <TextView
+            android:id="@+id/tvStep2Sub2"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Automatic Recognition: The app will automatically identify and list the items from your photos. Review and edit the item names if necessary."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep2Sub1"/>
+        <TextView
+            android:id="@+id/tvStep2Sub3"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Manual Addition: If you prefer, you can manually enter items by typing the name and description of each item."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep2Sub2"/>
+
+        <TextView
+            android:id="@+id/tvStep3"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="Step 3: Check Your Luggage List"
+            android:textColor="@color/hijau2"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep2Sub3" />
+        <TextView
+            android:id="@+id/tvStep3Sub1"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:text="Review Items: Go through the list of items you’ve added to ensure everything is accurate."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep3"/>
+        <TextView
+            android:id="@+id/tvStep3Sub2"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Verify Photos: Double-check the photos to make sure they match the listed items."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep3Sub1"/>
+        <TextView
+            android:id="@+id/tvStep3Sub3"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Edit as Needed: Make any necessary corrections to item names, categories, or notes to ensure your list is accurate."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep3Sub2"/>
+
+
+        <TextView
+            android:id="@+id/tvStep4"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="Step 4: Manage Your Items (Optional)"
+            android:textColor="@color/hijau2"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep3Sub3" />
+        <TextView
+            android:id="@+id/tvStep4Sub1"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:text="Verify Items: Double-check the Items to make sure they match the listed items."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep4"/>
+
+        <TextView
+            android:id="@+id/tvStep5"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="Step 5: Check Items When Returning"
+            android:textColor="@color/hijau2"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep4Sub1" />
+        <TextView
+            android:id="@+id/tvStep5Sub1"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:text="Recheck Luggage: As you pack to return home, use the app to recheck your items."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep5"/>
+        <TextView
+            android:id="@+id/tvStep5Sub2"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Mark Off Items: Ensure all items listed at the start of the trip are accounted for. Mark items off the list as you pack them."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep5Sub1"/>
+        <TextView
+            android:id="@+id/tvStep5Sub3"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Report Missing Items: If any items are missing, note them in the app for easy reference and follow-up."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep5Sub2"/>
+
+        <TextView
+            android:id="@+id/tvNeedHelp"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="Need Help?"
+            android:textColor="@color/hijau2"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStep5Sub3" />
+        <TextView
+            android:id="@+id/tvNeedHelpSub"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:text="If you have any questions or need assistance, feel free to contact our support team at support@findtofine.com"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvNeedHelp"/>
+
+        <ImageView
+            android:id="@+id/ivGambar2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/gambar_guide2"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvNeedHelpSub"/>
+
+        <TextView
+            android:id="@+id/tvEnjoyJourney"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="Enjoy Your Journey with FindToFine!"
+            android:textColor="@color/hijau2"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivGambar2" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

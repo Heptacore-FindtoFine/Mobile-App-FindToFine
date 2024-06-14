@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setOnClickListener{
             val intent = Intent(this, MainFeature1Activity::class.java)
             startActivity(intent)
-            finish()
         }
 
         navView.setOnNavigationItemSelectedListener { item ->

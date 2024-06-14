@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">FindToFine</string>
+
+    <string name="default_web_client_id">469810681034-uk7r4atmtv0jd7t1u0iu9m8vetdbgr65.apps.googleusercontent.com</string>
+
     <string name="get_started">Get Started</string>
     <string name="teks_description_welcome_page1">“Simplifies Luggage Management During Vacations”</string>
     <string name="fast_secure_list_item"><![CDATA[Fast & Secure List Item]]></string>
@@ -104,4 +107,15 @@
     <string name="welcome_to">Welcome To</string>
     <string name="subtitle_welcome">FindToFine is your ultimate travel companion designed to simplify luggage management and enhance your vacation planning experience. We understand that organizing your belongings for a trip can be stressful and time-consuming. That\'s why we\'ve developed FindToFine, a mobile application that streamlines the process of cataloging your holiday luggage with ease and efficiency.</string>
     <string name="title_activity_detail_history">DetailHistoryActivity</string>
+    <string name="subtittle_what_does">FindToFine allows you to create a comprehensive list of your travel items simply by taking photos of them. No more manual itemization or worrying about forgetting essential items. Our app leverages advanced Machine Learning and Image Recognition technologies to automatically identify and list your belongings, ensuring that nothing gets overlooked.</string>
+    <string name="subtittleWhyChoose">Efficiency, Save time and reduce stress by automating the packing list creation process.
+        Security, Ensure the safety of your belongings with a reliable and accessible inventory system.
+        Convenience, Plan your vacations better with an app that understands and adapts to your needs.
+        Variety, Customize your packing experience with diverse options tailored to different types of trips.
+        Accuracy, Rest assured that your inventory is precise and up-to-date, minimizing the risk of missing items.
+        Accessibility, Access your packing lists anytime, anywhere, whether you\'re online or offline, for ultimate convenience.
+        Organization, Keep track of your belongings effortlessly with categorized lists and intuitive search functionalities.</string>
+    <string name="subtittle_start">Embrace a hassle-free travel experience with FindToFine. Our app is designed to bring peace of mind, allowing you to focus on making memories rather than worrying about your luggage. Trust FindToFine to keep your belongings organized, secure, and easily accessible. Download FindToFine today and transform the way you plan and manage your trips. Happy travels!</string>
+    <string name="guide_sub1">Welcome to FindToFine! We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you use our mobile application.</string>
+    <string name="title_activity_checked_items">CheckedItemsActivity</string>
 </resources>
