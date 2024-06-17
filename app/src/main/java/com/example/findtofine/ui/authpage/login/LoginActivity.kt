@@ -51,8 +51,6 @@ class LoginActivity : AppCompatActivity() {
 
         googleSignIn = GoogleSignIn.getClient(this, gso)
 
-        val checkBox: CheckBox = binding.cbRememberMe
-        val isChecked: Boolean = checkBox.isChecked
 
         binding.tvSignUp.setOnClickListener{
             val intent = Intent(this, RegisterActivity::class.java)

@@ -118,4 +118,5 @@
     <string name="subtittle_start">Embrace a hassle-free travel experience with FindToFine. Our app is designed to bring peace of mind, allowing you to focus on making memories rather than worrying about your luggage. Trust FindToFine to keep your belongings organized, secure, and easily accessible. Download FindToFine today and transform the way you plan and manage your trips. Happy travels!</string>
     <string name="guide_sub1">Welcome to FindToFine! We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you use our mobile application.</string>
     <string name="title_activity_checked_items">CheckedItemsActivity</string>
+    <string name="availability">Availability</string>
 </resources>

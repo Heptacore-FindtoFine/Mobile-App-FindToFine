@@ -2,11 +2,12 @@ package com.example.findtofine.data.pref
 
 import android.content.Context
 import android.content.SharedPreferences
+
 object SharedPrefManager {
     private const val PREF_NAME = "user_pref"
     private const val UID = "uid"
     private const val EMAIL = "email"
-    private const val TOKEN = "token"
+    const val TOKEN = "token"
 
     private fun getSharedPreferences(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)

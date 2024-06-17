@@ -1,8 +1,11 @@
 package com.example.findtofine
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.findtofine.databinding.ActivityMainBinding
 import com.example.findtofine.ui.mainfeature.mf1.MainFeature1Activity
@@ -14,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private var doubleBackToExitPressedOnce = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -61,5 +65,28 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    override fun onBackPressed() {
+        if(doubleBackToExitPressedOnce){
+            super.onBackPressed()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+        AlertDialog.Builder(this)
+            .setMessage("Press back again to exit")
+            .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
+                finish()
+            })
+            .setNegativeButton("No", DialogInterface.OnClickListener { dialog, which ->
+                doubleBackToExitPressedOnce = false
+            })
+            .show()
+
+        // Delay to reset the flag
+        Handler().postDelayed({
+            doubleBackToExitPressedOnce = false
+        }, 2000)
     }
 }

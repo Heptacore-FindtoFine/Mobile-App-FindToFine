@@ -114,14 +114,28 @@
 
     </androidx.cardview.widget.CardView>
 
+    <TextView
+        android:id="@+id/tvOnGoing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="On Going"
+        android:textColor="@color/hijau2"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvItemScaned"/>
+
     <LinearLayout
         android:id="@+id/lyRv"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="350dp"
         android:orientation="vertical"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cvItemScaned">
+        app:layout_constraintTop_toBottomOf="@id/tvOnGoing">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

@@ -29,10 +29,11 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="200dp"
             android:layout_below="@id/textViewSubtitle"
             android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
             android:src="@drawable/baseline_broken_image_24" />
 
         <ImageView
@@ -63,13 +64,6 @@
                 android:layout_toRightOf="@id/textViewBelowImage"
                 android:text=" Item Scanned"
                 android:textSize="14sp" />
-
-            <ImageView
-                android:id="@+id/buttonArrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_arrow_forward_ios_24"
-                android:layout_alignParentEnd="true" />
         </RelativeLayout>
 
     </RelativeLayout>

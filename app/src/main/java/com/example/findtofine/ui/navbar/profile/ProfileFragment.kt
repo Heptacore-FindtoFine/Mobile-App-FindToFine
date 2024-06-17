@@ -13,6 +13,7 @@ import com.example.findtofine.databinding.FragmentProfileBinding
 import com.example.findtofine.ui.authpage.login.LoginActivity
 import com.example.findtofine.ui.navbar.profile.aboutapp.AboutActivity
 import com.example.findtofine.ui.navbar.profile.editprofile.EditProfileActivity
+import com.example.findtofine.ui.navbar.profile.privacypolicy.PrivacyPolicyActivity
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -38,6 +39,11 @@ class ProfileFragment : Fragment() {
 
         binding.llAbout.setOnClickListener{
             val intent = Intent(activity, AboutActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.llPrivacy.setOnClickListener {
+            val intent = Intent(activity, PrivacyPolicyActivity::class.java)
             startActivity(intent)
         }
 

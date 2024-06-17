@@ -6,4 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".ui.navbar.home.CheckedItemsActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvSub1"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:text="It's time to make sure you have everything you need! Please review the list of items you packed for your trip. Check each item to confirm if it's present or missing."
+        android:textSize="14sp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="90dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvSub2"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:text="Once you have reviewed all your items, tap the Confirm button to save your checked items list."
+        android:textSize="14sp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSub1"/>
+
+    <ScrollView
+        android:id="@+id/sv1"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSub2">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/tvItemPresent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item Present : "
+        android:textSize="16sp"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sv1"/>
+    <TextView
+        android:id="@+id/tvItemMissing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item Missing : "
+        android:textSize="16sp"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvItemPresent"/>
+    <TextView
+        android:id="@+id/tvTotalItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Items : "
+        android:textSize="16sp"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvItemMissing"/>
+
+    <Button
+        android:id="@+id/btnConfirm"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:text="Confirm"
+        android:backgroundTint="@color/hijau2"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTotalItems"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

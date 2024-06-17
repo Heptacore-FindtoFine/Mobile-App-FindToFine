@@ -78,7 +78,7 @@ class RegisterActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val apiService = ApiConfig.getApiService()
             try {
-                val response = apiService.login(email, password)
+                val response = apiService.register(email, password)
                 withContext(Dispatchers.Main) {
                     if (response.data != null) {
                         // Login success, show notification

@@ -1,9 +1,284 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.navbar.profile.privacypolicy.PrivacyPolicyActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvIntroduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Introduction"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="@color/hijau2"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+        <TextView
+            android:id="@+id/tvSubIntroduction"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="Welcome to FindToFine! We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you use our mobile application."
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvIntroduction"/>
+
+        <TextView
+            android:id="@+id/tvInformationCollection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Information Collection"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="@color/hijau2"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubIntroduction"/>
+        <TextView
+            android:id="@+id/tvSubInformationCollection"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="Photos of Luggage Items: To help you create a detailed inventory of your travel belongings."
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvInformationCollection"/>
+        <TextView
+            android:id="@+id/tvSubInformationCollection2"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="Account Information: Such as your email address and password, to manage your user profile."
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubInformationCollection"/>
+        <TextView
+            android:id="@+id/tvSubInformationCollection23"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="Location Data: With your permission, to provide location-based services like nearby luggage storage options."
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubInformationCollection2"/>
+
+        <TextView
+            android:id="@+id/tvUseInformation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Use of Information"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="@color/hijau2"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubInformationCollection23"/>
+        <TextView
+            android:id="@+id/tvSubUseInformation"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="Generate and manage your luggage inventory."
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvUseInformation"/>
+        <TextView
+            android:id="@+id/tvSubUseInformation2"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="Improve our services and user experience through data analysis."
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubUseInformation"/>
+        <TextView
+            android:id="@+id/tvSubUseInformation3"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="Provide personalized recommendations based on your travel patterns."
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubUseInformation2"/>
+
+        <TextView
+            android:id="@+id/tvDataStorage"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="Data Storage and Security"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="@color/hijau2"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubUseInformation3"/>
+        <TextView
+            android:id="@+id/tvSubDataStorage"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="All collected data is securely stored in cloud storage, protected by encryption and access control measures. We regularly review our security practices to ensure the highest level of data protection."
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDataStorage"/>
+
+        <TextView
+            android:id="@+id/tvUseRights"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Rights"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="@color/hijau2"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubDataStorage"/>
+        <TextView
+            android:id="@+id/tvSubUseRights"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="Access: You can request a copy of your personal data."
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvUseRights"/>
+        <TextView
+            android:id="@+id/tvSubUseRights2"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="Modification: You can update or correct your personal information."
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubUseRights"/>
+        <TextView
+            android:id="@+id/tvSubUseRights3"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="Deletion: You can request the deletion of your data from our systems."
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubUseRights2"/>
+        <TextView
+            android:id="@+id/tvSubUseRights4"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="To exercise any of these rights, please contact us at support@findtofine.com"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubUseRights3"/>
+
+        <TextView
+            android:id="@+id/tvChangePrivacyPolicy"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="Changes to the Privacy Policy"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="@color/hijau2"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubUseRights4"/>
+        <TextView
+            android:id="@+id/tvSubChangePrivacyPolicy"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="We may update this Privacy Policy from time to time. You will be notified of any significant changes through our app or via email. The date of the latest update will be indicated at the top of the policy."
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvChangePrivacyPolicy"/>
+
+        <TextView
+            android:id="@+id/tvContactInformation"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="Contact Information"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="@color/hijau2"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubChangePrivacyPolicy"/>
+        <TextView
+            android:id="@+id/tvSubContactInformation"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="If you have any questions or concerns about this Privacy Policy, please contact us at support@findtofine.com"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvContactInformation"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

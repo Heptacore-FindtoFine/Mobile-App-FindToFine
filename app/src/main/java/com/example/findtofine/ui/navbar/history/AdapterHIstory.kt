@@ -1,4 +1,4 @@
-package com.example.findtofine.ui.navbar.home
+package com.example.findtofine.ui.navbar.history
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,10 +7,12 @@ import com.bumptech.glide.Glide
 import com.example.findtofine.data.MyItems
 import com.example.findtofine.databinding.ItemCardBinding
 
-class AdapterHome(
-    private var items: List<MyItems>,
+class AdapterHIstory(
+    var items: List<MyItems>,
     private val itemClickListener: (MyItems) -> Unit
-) : RecyclerView.Adapter<AdapterHome.MyViewHolder>() {
+) : RecyclerView.Adapter<AdapterHIstory.MyViewHolder>() {
+
+    private var filteredItems: List<MyItems> = items
 
     class MyViewHolder(
         private val binding: ItemCardBinding,
@@ -44,4 +46,5 @@ class AdapterHome(
         items = newItems
         notifyDataSetChanged()
     }
+
 }
