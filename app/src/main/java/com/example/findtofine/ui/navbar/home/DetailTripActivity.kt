@@ -54,6 +54,18 @@ class DetailTripActivity : AppCompatActivity(), AdapterDetail.OnDataChangeListen
                 Log.e("DetailTripActivity", "taskDetail is null")
             }
         }
+
+        binding.btnEndtrip.setOnClickListener {
+            taskDetail?.let {
+                Log.d("DetailTripActivity", "End trip: $it")  // Add log for debugging
+                val intent = Intent(this, CheckedItemsActivity::class.java)
+                intent.putExtra("task_detail", it)
+                startActivity(intent)
+                finish()
+            } ?: run {
+                Log.e("DetailTripActivity", "taskDetail is null")
+            }
+        }
     }
 
     private fun fetchTaskDetail(taskId: String) {

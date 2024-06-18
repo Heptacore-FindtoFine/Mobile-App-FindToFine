@@ -38,10 +38,13 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import androidx.lifecycle.lifecycleScope
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.InputStream
 
 class MainFeature1Activity : AppCompatActivity() {
     private lateinit var binding: ActivityMainFeature1Binding
     private var currentPhotoPath: String? = null
+    private var selectedImageUri: Uri? = null
     private val imageList = mutableListOf<ImageItem>()
     private lateinit var imageAdapter: MainFeatureAdapter
     private var imageSource: ImageSource? = null
@@ -230,6 +233,7 @@ class MainFeature1Activity : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 REQUEST_CAMERA -> {
+                    selectedImageUri = null
                     currentPhotoPath?.let { path ->
                         val file = File(path)
                         val uri = Uri.fromFile(file)
@@ -238,16 +242,21 @@ class MainFeature1Activity : AppCompatActivity() {
                 }
 
                 REQUEST_GALLERY -> {
-                    val selectedImageUri: Uri? = data?.data
-                    selectedImageUri?.let { handleImageResult(it) }
+                    currentPhotoPath = null
+                    selectedImageUri = data?.data
+                    selectedImageUri?.let {
+                        handleImageResult(it)
+                    }
                 }
             }
         }
     }
 
     private fun handleImageResult(uri: Uri) {
+        // Gunakan selectedImageUri untuk memeriksa sumber gambar
         when (imageSource) {
             ImageSource.UPLOAD_FOTO -> {
+                selectedImageUri = uri  // Set selectedImageUri untuk gambar dari galeri
                 Glide.with(this)
                     .load(uri)
                     .fitCenter()
@@ -255,11 +264,10 @@ class MainFeature1Activity : AppCompatActivity() {
             }
 
             ImageSource.ADD_ITEMS -> {
-                addImageToList(uri)
+                addImageToList(uri)  // Tetap gunakan uri yang diterima dari parameter
             }
 
-            null -> { /* No action needed */
-            }
+            null -> { /* No action needed */ }
         }
     }
 
@@ -270,9 +278,28 @@ class MainFeature1Activity : AppCompatActivity() {
         imageAdapter.notifyDataSetChanged()
     }
 
+    private fun getFileFromUri(uri: Uri): File? {
+        val path = getPathFromUri(uri)
+        return if (path != null) File(path) else null
+    }
+
+    private fun getPathFromUri(uri: Uri): String? {
+        var path: String? = null
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = contentResolver.query(uri, projection, null, null, null)
+        cursor?.use {
+            if (it.moveToFirst()) {
+                val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                path = it.getString(columnIndex)
+            }
+        }
+        return path
+    }
+
+    @SuppressLint("Recycle")
     private suspend fun uploadTask() {
-        if (currentPhotoPath == null) {
-            Toast.makeText(this@MainFeature1Activity, "Please take a photo first", Toast.LENGTH_SHORT).show()
+        if (currentPhotoPath == null && selectedImageUri == null) {
+            Toast.makeText(this@MainFeature1Activity, "Please take a photo or select from gallery first", Toast.LENGTH_SHORT).show()
             return
         }
         // Retrieve user input
@@ -292,19 +319,37 @@ class MainFeature1Activity : AppCompatActivity() {
         val token = SharedPrefManager.getUserData(this)["token"] ?: return
 
         // Convert image from ivUploadFoto to MultipartBody.Part
-        val uploadFotoFile = File(currentPhotoPath)
-        val uploadFotoRequestBody = uploadFotoFile.asRequestBody("image/*".toMediaTypeOrNull())
-        val uploadFotoPart =
+        val uploadFotoPart = if (currentPhotoPath != null) {
+            // Gambar diambil dari kamera
+            val uploadFotoFile = File(currentPhotoPath!!)
+            val uploadFotoRequestBody = uploadFotoFile.asRequestBody("image/*".toMediaTypeOrNull())
             MultipartBody.Part.createFormData("image", uploadFotoFile.name, uploadFotoRequestBody)
+        } else if (selectedImageUri != null) {
+            // Gambar dipilih dari galeri
+            val inputStream = contentResolver.openInputStream(selectedImageUri!!)
+            val byteArray = inputStream?.readBytes()
+            byteArray?.let {
+                val uploadFotoRequestBody = it.toRequestBody("image/*".toMediaTypeOrNull())
+                MultipartBody.Part.createFormData("image", "upload.jpg", uploadFotoRequestBody)
+            }
+        } else {
+            null
+        }
+
+        if (uploadFotoPart == null) {
+            Toast.makeText(this, "Failed to process the selected image", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         // Convert images from recyclerView to List<MultipartBody.Part>
         val itemsParts = mutableListOf<MultipartBody.Part>()
         for (imageItem in imageList) {
-            val imageFile = File(imageItem.imageUri.path!!)
-            val imageRequestBody = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
-            val imagePart =
-                MultipartBody.Part.createFormData("items[]", imageFile.name, imageRequestBody)
-            itemsParts.add(imagePart)
+            val imageFile = getFileFromUri(imageItem.imageUri)
+            if (imageFile != null) {
+                val imageRequestBody = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
+                val imagePart = MultipartBody.Part.createFormData("items", imageFile.name, imageRequestBody)
+                itemsParts.add(imagePart)
+            }
         }
 
         // Call API to upload task
@@ -328,7 +373,7 @@ class MainFeature1Activity : AppCompatActivity() {
                     Toast.makeText(this@MainFeature1Activity, "Failed to upload task", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
-                runOnUiThread {
+                withContext(Dispatchers.Main) {
                     Toast.makeText(this@MainFeature1Activity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
 

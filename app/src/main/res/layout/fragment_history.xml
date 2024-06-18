@@ -68,6 +68,14 @@
             android:layout_toEndOf="@id/tvBelowSearch"
             android:layout_marginStart="8dp"
             android:layout_centerVertical="true" />
+
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_toEndOf="@id/spinner"
+            android:layout_marginStart="8dp"
+            android:layout_centerVertical="true" />
     </RelativeLayout>
 
     <ScrollView

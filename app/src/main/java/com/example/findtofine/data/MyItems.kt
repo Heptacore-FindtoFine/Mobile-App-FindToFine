@@ -6,5 +6,6 @@ data class MyItems (
     val subtitle: String,
     val image: String,
     val items: Int,
-    val createAt: String
+    val createAt: String,
+    val status: String
 )

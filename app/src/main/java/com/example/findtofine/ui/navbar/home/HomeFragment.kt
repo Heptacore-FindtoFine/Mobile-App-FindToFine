@@ -74,14 +74,19 @@ class HomeFragment : Fragment() {
                 val response = ApiConfig.getApiService().getAllTask(token)
                 val items = response.mapNotNull {
                     it?.let { task ->
-                        MyItems(
-                            title = task.title ?: "",
-                            subtitle = task.location ?: "",
-                            image = task.image ?: "",
-                            items = task.items ?: 0,
-                            id = task.id ?: "",
-                            createAt = task.createdAt ?: ""
-                        )
+                        if (task.status == "false") {
+                            MyItems(
+                                title = task.title ?: "",
+                                subtitle = task.location ?: "",
+                                image = task.image ?: "",
+                                items = task.items ?: 0,
+                                id = task.id ?: "",
+                                createAt = task.createdAt ?: "",
+                                status = task.status ?: ""
+                            )
+                        } else {
+                            null
+                        }
                     }
                 }
                 withContext(Dispatchers.Main) {

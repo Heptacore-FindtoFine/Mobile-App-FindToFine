@@ -57,6 +57,7 @@ class HistoryFragment : Fragment() {
 
         // Setup Spinner
         setupSpinner()
+        setupSpinner2()
 
         fetchData()
     }
@@ -89,7 +90,8 @@ class HistoryFragment : Fragment() {
                             image = task.image ?: "",
                             items = task.items ?: 0,
                             id = task.id ?: "",
-                            createAt = task.createdAt ?: ""
+                            createAt = task.createdAt ?: "",
+                            status = task.status ?: ""
                         )
                     }
                 }
@@ -122,6 +124,34 @@ class HistoryFragment : Fragment() {
                 // Do nothing
             }
         }
+    }
+
+    private fun setupSpinner2() {
+        val spinnerItems2 = arrayOf("None", "Ongoing", "Completed")
+        val spinnerAdapter2 = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItems2)
+        spinnerAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinner2.adapter = spinnerAdapter2
+
+        binding.spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                when (position) {
+                    1 -> filterItemsByStatus(false) // Ongoing
+                    2 -> filterItemsByStatus(true)  // Completed
+                    else -> fetchData()// None
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Do nothing
+            }
+        }
+    }
+
+    private fun filterItemsByStatus(isCompleted: Boolean) {
+        val filteredList = originalItems.filter {
+            if (isCompleted) it.status == "true" else it.status == "false"
+        }
+        adapter.updateData(filteredList)
     }
 
     private fun sortItemsByDate(isNewest: Boolean) {
