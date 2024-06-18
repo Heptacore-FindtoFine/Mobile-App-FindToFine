@@ -1,6 +1,7 @@
 package com.example.findtofine.ui.navbar.home
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,10 +24,16 @@ class DetailTripActivity : AppCompatActivity(), AdapterDetail.OnDataChangeListen
     private lateinit var binding: ActivityDetailTripBinding
     private lateinit var adapter: AdapterDetail
     private var taskDetail: GetTaskDetailResponse? =null
+    private lateinit var progressDialog: ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailTripBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Gathering Data")
+        progressDialog.setMessage("Please wait...")
+        progressDialog.setCancelable(false)
 
         val toolbar: Toolbar = binding.toolbar
         setSupportActionBar(toolbar)
@@ -69,16 +76,19 @@ class DetailTripActivity : AppCompatActivity(), AdapterDetail.OnDataChangeListen
     }
 
     private fun fetchTaskDetail(taskId: String) {
+        progressDialog.show()
         val token = SharedPrefManager.getUserData(this)["token"] ?: return
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = ApiConfig.getApiService().getDetailTask(token, taskId)
                 withContext(Dispatchers.Main) {
+                    progressDialog.dismiss()
                     taskDetail = response
                     updateUI(response)
                 }
             } catch (e: Exception) {
+                progressDialog.dismiss()
                 e.printStackTrace() // Handle the error
             }
         }

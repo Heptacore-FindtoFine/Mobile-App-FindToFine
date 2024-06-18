@@ -1,6 +1,7 @@
 package com.example.findtofine.ui.authpage.register
 
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,11 +25,18 @@ import java.io.IOException
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
+    private lateinit var progressDialog: ProgressDialog
+
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Registering In")
+        progressDialog.setMessage("Please wait...")
+        progressDialog.setCancelable(false)
 
         auth = FirebaseAuth.getInstance()
 
@@ -75,11 +83,13 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun register(email: String, password: String) {
+        progressDialog.show()
         CoroutineScope(Dispatchers.IO).launch {
             val apiService = ApiConfig.getApiService()
             try {
                 val response = apiService.register(email, password)
                 withContext(Dispatchers.Main) {
+                    progressDialog.dismiss()
                     if (response.data != null) {
                         // Login success, show notification
                         showCustomNotif()
@@ -90,11 +100,13 @@ class RegisterActivity : AppCompatActivity() {
                 }
             } catch (e: HttpException) {
                 withContext(Dispatchers.Main) {
+                    progressDialog.dismiss()
                     // Show error message
                     Toast.makeText(this@RegisterActivity, "Authentication failed: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: IOException) {
                 withContext(Dispatchers.Main) {
+                    progressDialog.dismiss()
                     // Show error message
                     Toast.makeText(this@RegisterActivity, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }

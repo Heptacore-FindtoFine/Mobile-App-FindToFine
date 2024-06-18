@@ -1,6 +1,7 @@
 package com.example.findtofine.ui.navbar.home
 
 import android.app.DatePickerDialog
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -26,10 +27,16 @@ class EditTripActivity : AppCompatActivity(), OnItemDeleteClickListener {
     private lateinit var binding: ActivityEditTripBinding
     private lateinit var adapter: AdapterEditTrip
     private var taskDetail: GetTaskDetailResponse? = null
+    private lateinit var progressDialog: ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditTripBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Updating Data")
+        progressDialog.setMessage("Please wait...")
+        progressDialog.setCancelable(false)
 
         val toolbar: Toolbar = binding.toolbar
         setSupportActionBar(toolbar)
@@ -56,6 +63,10 @@ class EditTripActivity : AppCompatActivity(), OnItemDeleteClickListener {
 
         binding.btnSave.setOnClickListener {
             saveEditData()
+        }
+
+        binding.btnDelete.setOnClickListener {
+            deleteTask()
         }
 
         updateTotalItemsTextView()
@@ -101,6 +112,7 @@ class EditTripActivity : AppCompatActivity(), OnItemDeleteClickListener {
     }
 
     private fun saveEditData() {
+        progressDialog.show()
         val title = binding.etTitleTrip.text.toString()
         val description = binding.etDeskripsi.text.toString()
         val location = binding.etLocation.text.toString()
@@ -135,8 +147,35 @@ class EditTripActivity : AppCompatActivity(), OnItemDeleteClickListener {
                 val intent = Intent(this@EditTripActivity, MainActivity::class.java)
                 startActivity(intent)
                 finish() // Close the activity
+                progressDialog.dismiss()
             } catch (e: Exception) {
+                progressDialog.dismiss()
                 Toast.makeText(this@EditTripActivity, "Failed to update task", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun deleteTask() {
+        progressDialog.show()
+        val token = SharedPrefManager.getUserData(this)["token"] ?: return
+        val taskId = taskDetail?.id ?: return
+
+        lifecycleScope.launch {
+            try {
+                val apiService = ApiConfig.getApiService()
+                val response = apiService.deleteItems("Bearer $token", taskId)
+                progressDialog.dismiss()
+                if (response.message != null) {
+                    Toast.makeText(this@EditTripActivity, "Task deleted successfully", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@EditTripActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish() // Close the activity
+                } else {
+                    Toast.makeText(this@EditTripActivity, "Failed to delete task", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                progressDialog.dismiss()
+                Toast.makeText(this@EditTripActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }

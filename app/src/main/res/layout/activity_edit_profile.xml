@@ -29,12 +29,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintRight_toLeftOf="@id/tvTitle"/>
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/pp_circle_hijau"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="15dp"
+        android:src="@drawable/pp_circle_hijau"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"/>

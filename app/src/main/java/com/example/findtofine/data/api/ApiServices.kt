@@ -2,11 +2,14 @@ package com.example.findtofine.data.api
 
 import com.example.findtofine.data.UpdateItemsStatus
 import com.example.findtofine.data.UpdateTaskRequest
+import com.example.findtofine.data.response.DeleteResponse
 import com.example.findtofine.data.response.GetAllTaskResponseItem
 import com.example.findtofine.data.response.GetTaskDetailResponse
 import com.example.findtofine.data.response.LoginResponse
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -54,12 +57,12 @@ interface ApiServices {
     @POST("task")
     suspend fun uploadTask(
         @Header("Authorization") token: String,
-        @Part("title") title: String,
+        @Part("title") title: RequestBody,
         @Part image: MultipartBody.Part,
         @Part("startDate") startDate: String,
         @Part("finishDate") finishDate: String,
-        @Part("location") location: String,
-        @Part("description") description: String,
+        @Part("location") location: RequestBody,
+        @Part("description") description: RequestBody,
         @Part items: List<MultipartBody.Part>
     ): GetTaskDetailResponse
 
@@ -69,6 +72,12 @@ interface ApiServices {
         @Path("id") id: String,
         @Body updateItemsStatus: UpdateItemsStatus
     ) : GetTaskDetailResponse
+
+    @DELETE("task/{id}")
+    suspend fun deleteItems(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+    ) : DeleteResponse
 
 
 }

@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -48,6 +49,7 @@ class MainFeature1Activity : AppCompatActivity() {
     private val imageList = mutableListOf<ImageItem>()
     private lateinit var imageAdapter: MainFeatureAdapter
     private var imageSource: ImageSource? = null
+    private lateinit var progressDialog: ProgressDialog
 
     enum class ImageSource {
         UPLOAD_FOTO,
@@ -65,6 +67,11 @@ class MainFeature1Activity : AppCompatActivity() {
         binding = ActivityMainFeature1Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Uploading Data")
+        progressDialog.setMessage("Please wait...")
+        progressDialog.setCancelable(false)
+
         imageAdapter = MainFeatureAdapter(imageList)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainFeature1Activity)
@@ -76,8 +83,12 @@ class MainFeature1Activity : AppCompatActivity() {
         }
 
         binding.btnNext.setOnClickListener {
-            lifecycleScope.launch {
-                uploadTask()
+            if (currentPhotoPath == null && selectedImageUri == null) {
+                Toast.makeText(this@MainFeature1Activity, "Please take a photo or select from gallery first", Toast.LENGTH_SHORT).show()
+            } else {
+                lifecycleScope.launch {
+                    uploadTask()
+                }
             }
         }
 
@@ -256,7 +267,7 @@ class MainFeature1Activity : AppCompatActivity() {
         // Gunakan selectedImageUri untuk memeriksa sumber gambar
         when (imageSource) {
             ImageSource.UPLOAD_FOTO -> {
-                selectedImageUri = uri  // Set selectedImageUri untuk gambar dari galeri
+                selectedImageUri = uri
                 Glide.with(this)
                     .load(uri)
                     .fitCenter()
@@ -298,6 +309,7 @@ class MainFeature1Activity : AppCompatActivity() {
 
     @SuppressLint("Recycle")
     private suspend fun uploadTask() {
+        progressDialog.show()
         if (currentPhotoPath == null && selectedImageUri == null) {
             Toast.makeText(this@MainFeature1Activity, "Please take a photo or select from gallery first", Toast.LENGTH_SHORT).show()
             return
@@ -318,27 +330,31 @@ class MainFeature1Activity : AppCompatActivity() {
         // Retrieve token from SharedPrefManager
         val token = SharedPrefManager.getUserData(this)["token"] ?: return
 
-        // Convert image from ivUploadFoto to MultipartBody.Part
-        val uploadFotoPart = if (currentPhotoPath != null) {
-            // Gambar diambil dari kamera
-            val uploadFotoFile = File(currentPhotoPath!!)
-            val uploadFotoRequestBody = uploadFotoFile.asRequestBody("image/*".toMediaTypeOrNull())
-            MultipartBody.Part.createFormData("image", uploadFotoFile.name, uploadFotoRequestBody)
-        } else if (selectedImageUri != null) {
-            // Gambar dipilih dari galeri
-            val inputStream = contentResolver.openInputStream(selectedImageUri!!)
-            val byteArray = inputStream?.readBytes()
-            byteArray?.let {
-                val uploadFotoRequestBody = it.toRequestBody("image/*".toMediaTypeOrNull())
-                MultipartBody.Part.createFormData("image", "upload.jpg", uploadFotoRequestBody)
+        // Prepare uploadFotoPart
+        val uploadFotoPart = when {
+            currentPhotoPath != null -> {
+                // Image taken from camera
+                val uploadFotoFile = File(currentPhotoPath!!)
+                val uploadFotoRequestBody = uploadFotoFile.asRequestBody("image/*".toMediaTypeOrNull())
+                MultipartBody.Part.createFormData("image", uploadFotoFile.name, uploadFotoRequestBody)
             }
-        } else {
-            null
-        }
-
-        if (uploadFotoPart == null) {
-            Toast.makeText(this, "Failed to process the selected image", Toast.LENGTH_SHORT).show()
-            return
+            selectedImageUri != null -> {
+                // Image selected from gallery
+                val inputStream = contentResolver.openInputStream(selectedImageUri!!)
+                val byteArray = inputStream?.readBytes()
+                byteArray?.let {
+                    val uploadFotoRequestBody = it.toRequestBody("image/*".toMediaTypeOrNull())
+                    MultipartBody.Part.createFormData("image", "upload.jpg", uploadFotoRequestBody)
+                } ?: run {
+                    Toast.makeText(this@MainFeature1Activity, "Failed to process the selected image", Toast.LENGTH_SHORT).show()
+                    return
+                }
+            }
+            else -> {
+                // This should ideally not happen if we validated properly above
+                Toast.makeText(this@MainFeature1Activity, "Failed to process the selected image", Toast.LENGTH_SHORT).show()
+                return
+            }
         }
 
         // Convert images from recyclerView to List<MultipartBody.Part>
@@ -352,27 +368,36 @@ class MainFeature1Activity : AppCompatActivity() {
             }
         }
 
+        val titlePart = title.toRequestBody("text/plain".toMediaTypeOrNull())
+        val startDatePart = startDate.toRequestBody("text/plain".toMediaTypeOrNull())
+        val endDatePart = endDate.toRequestBody("text/plain".toMediaTypeOrNull())
+        val locationPart = location.toRequestBody("text/plain".toMediaTypeOrNull())
+        val descriptionPart = description.toRequestBody("text/plain".toMediaTypeOrNull())
+
         // Call API to upload task
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = ApiConfig.getApiService().uploadTask(
                     "Bearer $token",
-                    title,
+                    titlePart,
                     uploadFotoPart,
                     startDate,
                     endDate,
-                    location,
-                    description,
+                    locationPart,
+                    descriptionPart,
                     itemsParts
                 )
 
                 // Handle response
                 if (response != null) {
+                    progressDialog.dismiss()
                     // Task uploaded successfully, do something if needed
                 } else {
+                    progressDialog.dismiss()
                     Toast.makeText(this@MainFeature1Activity, "Failed to upload task", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
+                progressDialog.dismiss()
                 withContext(Dispatchers.Main) {
                     Toast.makeText(this@MainFeature1Activity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }

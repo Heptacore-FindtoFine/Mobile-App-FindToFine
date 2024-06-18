@@ -1,11 +1,17 @@
 package com.example.findtofine.ui.navbar.profile
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.example.findtofine.R
 import com.example.findtofine.data.pref.SharedPrefManager
 import com.example.findtofine.databinding.FragmentHomeBinding
@@ -14,6 +20,7 @@ import com.example.findtofine.ui.authpage.login.LoginActivity
 import com.example.findtofine.ui.navbar.profile.aboutapp.AboutActivity
 import com.example.findtofine.ui.navbar.profile.editprofile.EditProfileActivity
 import com.example.findtofine.ui.navbar.profile.privacypolicy.PrivacyPolicyActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -48,8 +55,83 @@ class ProfileFragment : Fragment() {
         }
 
         binding.llLogOut.setOnClickListener {
-            logout()
+            showLogoutConfirmationDialog()
         }
+
+        loadProfileData()
+        if (!checkPermissions()) {
+            requestPermissions()
+        }
+    }
+
+    private fun checkPermissions(): Boolean {
+        val storagePermission = ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
+        return storagePermission == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            REQUEST_PERMISSION
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            REQUEST_PERMISSION -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission granted
+                    // Reload profile data here
+                    loadProfileData()
+                } else {
+                    // Permission denied
+                    Toast.makeText(requireContext(), "Permission denied", Toast.LENGTH_SHORT).show()
+                }
+                return
+            }
+        }
+    }
+
+
+    private fun loadProfileData() {
+        val userData = SharedPrefManager.getUserData(requireContext())
+        val firstName = userData["first_name"]
+        val lastName = userData["last_name"]
+        binding.tvEmail.text = userData["email"]
+
+
+        binding.tvName.text = "$firstName $lastName"
+
+        val profilePicture = userData["profile_picture"]
+        if (!profilePicture.isNullOrEmpty()) {
+            // Gunakan Glide untuk memuat gambar dari URI ke CircleImageView
+            Glide.with(this)
+                .load(profilePicture)
+                .fitCenter()
+                .into(binding.ivProfile)
+        }
+    }
+
+    private fun showLogoutConfirmationDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Logout")
+            .setMessage("Are you sure you want to logout?")
+            .setNegativeButton("Cancel") { dialog, which ->
+                // Respond to negative button press
+                dialog.dismiss()
+            }
+            .setPositiveButton("Logout") { dialog, which ->
+                // Respond to positive button press
+                logout()
+            }
+            .show()
     }
 
     private fun logout(){
@@ -63,5 +145,9 @@ class ProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val REQUEST_PERMISSION = 100
     }
 }

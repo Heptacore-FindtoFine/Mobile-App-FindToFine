@@ -61,6 +61,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvFindToFine" />
 
+    <ImageView
+        android:id="@+id/gambarLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/gambar_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitle"/>
+
     <TextView
         android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
@@ -71,7 +80,7 @@
         android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSubtitle" />
+        app:layout_constraintTop_toBottomOf="@id/gambarLogin" />
 
     <EditText
         android:id="@+id/etEmail"
@@ -87,7 +96,7 @@
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSubtitle" />
+        app:layout_constraintTop_toBottomOf="@id/gambarLogin" />
 
     <TextView
         android:id="@+id/tvPassword"
@@ -129,14 +138,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPassword">
 
-        <CheckBox
-            android:id="@+id/cbRememberMe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|center"
-            android:text="@string/remember_me"
-            android:textColor="@android:color/darker_gray" />
-
         <TextView
             android:id="@+id/tvForgotPassword"
             android:layout_width="0dp"
@@ -162,53 +163,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ly1" />
 
-    <TextView
-        android:id="@+id/tvOr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/or"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnLogIn" />
 
-    <Button
-        android:id="@+id/btnGoogle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="@android:color/white"
-        android:drawableLeft="@drawable/google_logo"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        android:text="@string/continue_with_google"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvOr" />
-
-    <Button
-        android:id="@+id/btnFacebook"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="@android:color/white"
-        android:drawableLeft="@drawable/facebook_logo"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        android:text="@string/continue_with_facebook"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnGoogle" />
 
     <TextView
         android:id="@+id/tvSignUpPrompt"
@@ -222,7 +177,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvSignUp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnFacebook" />
+        app:layout_constraintTop_toBottomOf="@id/btnLogIn" />
 
     <TextView
         android:id="@+id/tvSignUp"
@@ -236,5 +191,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvSignUpPrompt"
-        app:layout_constraintTop_toBottomOf="@id/btnFacebook" />
+        app:layout_constraintTop_toBottomOf="@id/btnLogIn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

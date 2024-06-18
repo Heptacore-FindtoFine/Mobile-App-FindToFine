@@ -1,6 +1,7 @@
 package com.example.findtofine.ui.authpage.login
 
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -37,10 +38,18 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignIn: GoogleSignInClient
     private val RC_SIGN_IN = 9001
+    private lateinit var progressDialog: ProgressDialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Logging In")
+        progressDialog.setMessage("Please wait...")
+        progressDialog.setCancelable(false)
+
 
         auth = FirebaseAuth.getInstance()
 
@@ -71,9 +80,6 @@ class LoginActivity : AppCompatActivity() {
             signIn(email,pass)
         }
 
-        binding.btnGoogle.setOnClickListener {
-            signInGoogle()
-        }
     }
 
     private fun showCustomNotif(){
@@ -94,11 +100,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun signIn(email: String, password: String) {
+        progressDialog.show()
+
         CoroutineScope(Dispatchers.IO).launch {
             val apiService = ApiConfig.getApiService()
             try {
                 val response = apiService.login(email, password)
                 withContext(Dispatchers.Main) {
+                    progressDialog.dismiss()
                     if (response.data != null) {
                         // Login success, show notification
                         SharedPrefManager.saveUserData(
@@ -115,11 +124,13 @@ class LoginActivity : AppCompatActivity() {
                 }
             } catch (e: HttpException) {
                 withContext(Dispatchers.Main) {
+                    progressDialog.dismiss()
                     // Show error message
                     Toast.makeText(this@LoginActivity, "Authentication failed: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: IOException) {
                 withContext(Dispatchers.Main) {
+                    progressDialog.dismiss()
                     // Show error message
                     Toast.makeText(this@LoginActivity, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }

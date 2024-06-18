@@ -1,6 +1,7 @@
 package com.example.findtofine.ui.navbar.home
 
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -26,10 +27,16 @@ class CheckedItemsActivity : AppCompatActivity(), OnItemDeleteClickListener {
     private lateinit var binding: ActivityCheckedItemsBinding
     private lateinit var adapter: AdapterChecked
     private var taskDetail: GetTaskDetailResponse? = null
+    private lateinit var progressDialog: ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCheckedItemsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Fetching Data")
+        progressDialog.setMessage("Please wait...")
+        progressDialog.setCancelable(false)
 
         val toolbar: Toolbar = binding.toolbar
         setSupportActionBar(toolbar)
@@ -54,6 +61,7 @@ class CheckedItemsActivity : AppCompatActivity(), OnItemDeleteClickListener {
     }
 
     private fun updateTaskEnd(){
+        progressDialog.show()
 
         val updateTaskRequest = UpdateTaskRequest(
             title = taskDetail?.title ?: "",
@@ -76,8 +84,10 @@ class CheckedItemsActivity : AppCompatActivity(), OnItemDeleteClickListener {
                     id = taskId,
                     updateTaskRequest = updateTaskRequest
                 )
+                progressDialog.dismiss()
                 Toast.makeText(this@CheckedItemsActivity, "Task updated successfully", Toast.LENGTH_SHORT).show()
             } catch (e: Exception){
+                progressDialog.dismiss()
                 Toast.makeText(this@CheckedItemsActivity, "Failed to update task", Toast.LENGTH_SHORT).show()
             }
         }
@@ -85,6 +95,7 @@ class CheckedItemsActivity : AppCompatActivity(), OnItemDeleteClickListener {
     }
 
     private fun updateTaskItems() {
+        progressDialog.show()
         val checkedItemNames = adapter.getCheckedItemNames()
         val taskId = taskDetail?.id ?: return
 
@@ -103,8 +114,10 @@ class CheckedItemsActivity : AppCompatActivity(), OnItemDeleteClickListener {
                     id = taskId,
                     updateItemsStatus = updateItemsStatus
                 )
+                progressDialog.dismiss()
                 showCustomNotif()
             } catch (e: Exception) {
+                progressDialog.dismiss()
                 e.printStackTrace() // Handle error
             }
         }

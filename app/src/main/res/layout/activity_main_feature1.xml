@@ -40,7 +40,7 @@
             android:src="@drawable/upload_foto"
             android:layout_marginTop="16dp"
             android:scaleType="fitCenter"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/recyclerView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -195,7 +195,7 @@
             android:layout_marginTop="40dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etDeskripsi"/>
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"/>
 
         <TextView
             android:id="@+id/tvSubtitle"
@@ -263,7 +263,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recyclerView"/>
+            app:layout_constraintTop_toBottomOf="@id/etDeskripsi"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,9 @@ class AdapterHome(
     private val itemClickListener: (MyItems) -> Unit
 ) : RecyclerView.Adapter<AdapterHome.MyViewHolder>() {
 
+    var totalItems: Int = 0
+    var completedTrips: Int = 0
+
     class MyViewHolder(
         private val binding: ItemCardBinding,
         private val itemClickListener: (MyItems) -> Unit
@@ -42,6 +45,8 @@ class AdapterHome(
 
     fun updateData(newItems: List<MyItems>) {
         items = newItems
+        totalItems = items.sumBy { it.items }
+        completedTrips = items.count { it.status == "true" }
         notifyDataSetChanged()
     }
 }

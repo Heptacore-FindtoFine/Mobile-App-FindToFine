@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.mainfeature.mf2.MainFeature2Activity">
+    tools:context=".ui.mainfeature.mf3.MainFeature3Activity">
 
     <ImageView
         android:id="@+id/btnBack"
@@ -20,7 +20,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter Items to Pack"
+        android:text="Trip Overview"
         android:textStyle="bold"
         android:textSize="28sp"
         android:textColor="@color/hijau2"
@@ -28,54 +28,81 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
-
+    
     <TextView
-        android:id="@+id/tvSubtitle"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:maxLines="3"
-        android:text="Easily add your travel items using the scan feature. Choose to take a new photo or select an image from your gallery."
+        android:id="@+id/tvSubAtas"
+        android:layout_width="300dp"
+        android:layout_height="67dp"
+        android:text="Please review all the details and items you've entered to ensure everything is correct before you finalize your trip."
+        android:textStyle="normal"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"/>
-
+    
     <ImageView
-        android:id="@+id/ivTips"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/mvp_tips"
-        android:layout_marginTop="20dp"
+        android:id="@+id/gambarThumnail"
+        android:layout_width="280dp"
+        android:layout_height="123dp"
+        android:src="@drawable/baseline_broken_image_24"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSubtitle"/>
+        app:layout_constraintTop_toBottomOf="@id/tvSubAtas"/>
 
     <TextView
-        android:id="@+id/tvAddItems"
+        android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Date : "
+        android:textSize="14sp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="50dp"
-        android:text="Add Items"
-        android:textColor="@color/hijau2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gambarThumnail"/>
+
+    <TextView
+        android:id="@+id/tvDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Duration : "
+        android:textSize="14sp"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDate"/>
+
+    <TextView
+        android:id="@+id/tvLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location : "
+        android:textSize="14sp"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDuration"/>
+
+    <TextView
+        android:id="@+id/tvDeskripsi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description : "
+        android:textSize="14sp"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLocation"/>
+
+    <TextView
+        android:id="@+id/tvItemPacked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Items Packed for the Trip"
         android:textSize="28sp"
         android:textStyle="bold"
+        android:textColor="@color/hijau2"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivTips" />
-
-    <ImageView
-        android:id="@+id/ivAddImage"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:src="@drawable/baseline_add_24"
-        android:background="@drawable/background_ijo"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivTips"
-        app:tint="@color/white" />
+        app:layout_constraintTop_toBottomOf="@id/tvDeskripsi"/>
 
     <ScrollView
         android:id="@+id/svRv"
@@ -83,7 +110,7 @@
         android:layout_height="350dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAddItems">
+        app:layout_constraintTop_toBottomOf="@id/tvItemPacked">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -92,7 +119,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnNext"
+        android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Next"
@@ -101,5 +128,6 @@
         android:layout_marginRight="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/svRv"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

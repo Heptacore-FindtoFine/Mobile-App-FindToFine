@@ -1,5 +1,6 @@
 package com.example.findtofine.ui.navbar.home
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.findtofine.R
 import com.example.findtofine.data.MyItems
 import com.example.findtofine.data.api.ApiConfig
@@ -31,6 +33,10 @@ class HomeFragment : Fragment() {
 
     private lateinit var adapter: AdapterHome
 
+    private lateinit var progressDialog: ProgressDialog
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +48,12 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog.setTitle("Loading")
+        progressDialog.setMessage("Fetching data...")
+        progressDialog.setCancelable(false)
+
         binding.recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         adapter = AdapterHome(emptyList()) { item ->
             val intent = Intent(requireContext(), DetailTripActivity::class.java)
@@ -63,10 +75,12 @@ class HomeFragment : Fragment() {
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
 
+        loadProfileData()
         fetchData()
     }
 
     private fun fetchData() {
+        progressDialog.show()
         val token = SharedPrefManager.getUserData(requireContext())["token"] ?: return
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -74,27 +88,48 @@ class HomeFragment : Fragment() {
                 val response = ApiConfig.getApiService().getAllTask(token)
                 val items = response.mapNotNull {
                     it?.let { task ->
-                        if (task.status == "false") {
-                            MyItems(
-                                title = task.title ?: "",
-                                subtitle = task.location ?: "",
-                                image = task.image ?: "",
-                                items = task.items ?: 0,
-                                id = task.id ?: "",
-                                createAt = task.createdAt ?: "",
-                                status = task.status ?: ""
-                            )
-                        } else {
-                            null
-                        }
+                        MyItems(
+                            title = task.title ?: "",
+                            subtitle = task.location ?: "",
+                            image = task.image ?: "",
+                            items = task.items ?: 0,
+                            id = task.id ?: "",
+                            createAt = task.createdAt ?: "",
+                            status = task.status ?: ""
+                        )
                     }
                 }
+
+                val completedTasksCount = items.count { it.status == "true" }
+
                 withContext(Dispatchers.Main) {
-                    adapter.updateData(items)
+                    progressDialog.dismiss()
+                    adapter.updateData(items.filter { it.status == "false" })
+                    binding.tvTotalItemScan.text = adapter.totalItems.toString()
+                    binding.tvCompletedTrips.text = completedTasksCount.toString()
                 }
             } catch (e: Exception) {
+                progressDialog.dismiss()
                 e.printStackTrace() // Handle the error
             }
+        }
+    }
+
+    private fun loadProfileData() {
+        val userData = SharedPrefManager.getUserData(requireContext())
+        val firstName = userData["first_name"]
+        val lastName = userData["last_name"]
+
+
+        binding.tvNamaUser.text = "$firstName $lastName"
+
+        val profilePicture = userData["profile_picture"]
+        if (!profilePicture.isNullOrEmpty()) {
+            // Gunakan Glide untuk memuat gambar dari URI ke CircleImageView
+            Glide.with(this)
+                .load(profilePicture)
+                .fitCenter()
+                .into(binding.ciUser)
         }
     }
 
