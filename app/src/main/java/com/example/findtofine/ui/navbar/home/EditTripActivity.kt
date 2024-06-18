@@ -119,7 +119,8 @@ class EditTripActivity : AppCompatActivity(), OnItemDeleteClickListener {
             finishDate = finishDate,
             location = location,
             description = description,
-            items = items
+            items = items,
+            status = false
         )
 
         lifecycleScope.launch {
@@ -147,6 +148,10 @@ class EditTripActivity : AppCompatActivity(), OnItemDeleteClickListener {
 
     override fun onItemDeleteClick(position: Int) {
         adapter.removeItem(position)
+    }
+
+    override fun onItemCountsUpdated(checkedCount: Int, missingCount: Int) {
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -1,5 +1,6 @@
 package com.example.findtofine.data.api
 
+import com.example.findtofine.data.UpdateItemsStatus
 import com.example.findtofine.data.UpdateTaskRequest
 import com.example.findtofine.data.response.GetAllTaskResponseItem
 import com.example.findtofine.data.response.GetTaskDetailResponse
@@ -61,6 +62,13 @@ interface ApiServices {
         @Part("description") description: String,
         @Part items: List<MultipartBody.Part>
     ): GetTaskDetailResponse
+
+    @PUT("task/{id}/items")
+    suspend fun updateTaskItems(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Body updateItemsStatus: UpdateItemsStatus
+    ) : GetTaskDetailResponse
 
 
 }

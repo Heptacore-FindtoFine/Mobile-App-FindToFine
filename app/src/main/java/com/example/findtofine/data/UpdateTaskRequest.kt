@@ -6,5 +6,6 @@ data class UpdateTaskRequest(
     val finishDate: String,
     val location: String,
     val description: String,
-    val items: List<String>
+    val items: List<String>,
+    val status: Boolean
 )

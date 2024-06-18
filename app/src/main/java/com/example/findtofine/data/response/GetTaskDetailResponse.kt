@@ -51,5 +51,5 @@ data class ItemsItem(
 	val name: String? = null,
 
 	@field:SerializedName("checked")
-	val checked: Boolean? = null
+	var checked: Boolean? = null
 ) : Parcelable

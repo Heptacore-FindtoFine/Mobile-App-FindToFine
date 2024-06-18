@@ -61,4 +61,5 @@ class AdapterEditTrip(
 
 interface OnItemDeleteClickListener {
     fun onItemDeleteClick(position: Int)
+    fun onItemCountsUpdated(checkedCount: Int, missingCount: Int)
 }
