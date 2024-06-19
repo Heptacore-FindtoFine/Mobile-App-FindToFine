@@ -59,6 +59,7 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), DetailTripActivity::class.java)
             intent.putExtra("task_id", item.id)
             startActivity(intent)
+            requireActivity().finish()
         }
         binding.recyclerView.adapter = adapter
 
@@ -121,7 +122,11 @@ class HomeFragment : Fragment() {
         val lastName = userData["last_name"]
 
 
-        binding.tvNamaUser.text = "$firstName $lastName"
+        if (firstName.isNullOrEmpty() || lastName.isNullOrEmpty()) {
+            binding.tvNamaUser.text = "Travelers"
+        } else {
+            binding.tvNamaUser.text = "$firstName $lastName"
+        }
 
         val profilePicture = userData["profile_picture"]
         if (!profilePicture.isNullOrEmpty()) {

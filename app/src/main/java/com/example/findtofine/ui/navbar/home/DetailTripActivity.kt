@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.findtofine.MainActivity
 import com.example.findtofine.R
 import com.example.findtofine.data.api.ApiConfig
 import com.example.findtofine.data.pref.SharedPrefManager
@@ -118,7 +119,9 @@ class DetailTripActivity : AppCompatActivity(), AdapterDetail.OnDataChangeListen
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
         return true
     }
 

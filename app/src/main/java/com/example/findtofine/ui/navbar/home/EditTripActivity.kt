@@ -194,7 +194,9 @@ class EditTripActivity : AppCompatActivity(), OnItemDeleteClickListener {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
         return true
     }
 }

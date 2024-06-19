@@ -107,7 +107,11 @@ class ProfileFragment : Fragment() {
         binding.tvEmail.text = userData["email"]
 
 
-        binding.tvName.text = "$firstName $lastName"
+        if (firstName.isNullOrEmpty() || lastName.isNullOrEmpty()) {
+            binding.tvName.text = "Travelers"
+        } else {
+            binding.tvName.text = "$firstName $lastName"
+        }
 
         val profilePicture = userData["profile_picture"]
         if (!profilePicture.isNullOrEmpty()) {

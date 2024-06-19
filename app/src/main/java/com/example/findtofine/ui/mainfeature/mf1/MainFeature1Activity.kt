@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.view.Window
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -39,6 +41,9 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import androidx.lifecycle.lifecycleScope
+import com.example.findtofine.MainActivity
+import com.example.findtofine.databinding.NotifCustomSavedBinding
+import com.example.findtofine.databinding.NotifCustomTripBinding
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.InputStream
 
@@ -79,6 +84,8 @@ class MainFeature1Activity : AppCompatActivity() {
         }
 
         binding.btnBack.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
             finish()
         }
 
@@ -391,6 +398,7 @@ class MainFeature1Activity : AppCompatActivity() {
                 // Handle response
                 if (response != null) {
                     progressDialog.dismiss()
+                    showCustomNotif()
                     // Task uploaded successfully, do something if needed
                 } else {
                     progressDialog.dismiss()
@@ -398,11 +406,31 @@ class MainFeature1Activity : AppCompatActivity() {
                 }
             } catch (e: Exception) {
                 progressDialog.dismiss()
+                showCustomNotif()
                 withContext(Dispatchers.Main) {
                     Toast.makeText(this@MainFeature1Activity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
 
             }
+        }
+    }
+
+    private fun showCustomNotif() {
+        runOnUiThread {
+            val dialog = Dialog(this)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            val dialogBinding = NotifCustomSavedBinding.inflate(layoutInflater)
+            dialog.setContentView(dialogBinding.root)
+
+            dialogBinding.btnTravel.setOnClickListener {
+                // Handle button click
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+                dialog.dismiss()
+            }
+
+            dialog.show()
         }
     }
 }
