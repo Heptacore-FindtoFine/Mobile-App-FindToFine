@@ -9,12 +9,12 @@ These instructions will give you a copy of the project up and running on
 your local machine for development and testing purposes. See deployment
 for notes on deploying the project on a live system.
 
-### Prerequisites
+### Desain Mockup Figma
 
 You can see the figma design here
 - [Figma](https://developer.android.com/studio?hl=id)
 
-### Desain Mockup Figma
+### Prerequisites
 
 Requirements for the software and other tools to build and test
 - [Android Studio](https://www.figma.com/design/haFktx0aGJgHTHst18KXLc/Mobile-App---FindToFine?node-id=34-245&t=6VHgNQPGzmKK693W-0)
