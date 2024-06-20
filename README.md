@@ -41,5 +41,5 @@ To see the results of the deployment, you can see the following link
 ## Authors
 
   - **Muhammad Reza Ivano Pahlevi**
-    [IvanoWoii](https://github.com/PurpleBooth](https://github.com/IvanoWoii)
+    [IvanoWoii](https://github.com/IvanoWoii)
 - **Kus Dwi Prastyo**
