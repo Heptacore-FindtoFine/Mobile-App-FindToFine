@@ -6,6 +6,7 @@ import com.example.findtofine.data.response.DeleteResponse
 import com.example.findtofine.data.response.GetAllTaskResponseItem
 import com.example.findtofine.data.response.GetTaskDetailResponse
 import com.example.findtofine.data.response.LoginResponse
+import com.example.findtofine.data.response.RegisterResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -33,7 +34,7 @@ interface ApiServices {
     suspend fun register(
         @Field("email") email: String,
         @Field("password") password: String
-    ): LoginResponse
+    ): RegisterResponse
 
     @GET("task")
     suspend fun getAllTask(

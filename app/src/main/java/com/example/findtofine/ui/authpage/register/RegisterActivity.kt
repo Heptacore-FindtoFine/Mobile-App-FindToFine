@@ -46,6 +46,12 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.tvLogIn.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         binding.btnRegister.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()
             val pass = binding.etPassword.text.toString().trim()
@@ -90,7 +96,7 @@ class RegisterActivity : AppCompatActivity() {
                 val response = apiService.register(email, password)
                 withContext(Dispatchers.Main) {
                     progressDialog.dismiss()
-                    if (response.data != null) {
+                    if (response != null) {
                         // Login success, show notification
                         showCustomNotif()
                     } else {

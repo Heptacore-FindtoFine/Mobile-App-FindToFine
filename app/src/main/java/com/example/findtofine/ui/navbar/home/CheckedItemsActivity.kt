@@ -86,6 +86,7 @@ class CheckedItemsActivity : AppCompatActivity(), OnItemDeleteClickListener {
                 )
                 progressDialog.dismiss()
                 Toast.makeText(this@CheckedItemsActivity, "Task updated successfully", Toast.LENGTH_SHORT).show()
+                showCustomNotif()
             } catch (e: Exception){
                 progressDialog.dismiss()
                 Toast.makeText(this@CheckedItemsActivity, "Failed to update task", Toast.LENGTH_SHORT).show()

@@ -20,6 +20,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class DetailTripActivity : AppCompatActivity(), AdapterDetail.OnDataChangeListener {
     private lateinit var binding: ActivityDetailTripBinding
@@ -87,6 +89,13 @@ class DetailTripActivity : AppCompatActivity(), AdapterDetail.OnDataChangeListen
                     progressDialog.dismiss()
                     taskDetail = response
                     updateUI(response)
+
+                    val startDate = taskDetail!!.startDate ?: ""
+                    val finishDate = taskDetail!!.finishDate ?: ""
+
+                    val duaration = getDuration(startDate,finishDate)
+
+                    binding.tvDuration.text = "Duration : $duaration Days"
                 }
             } catch (e: Exception) {
                 progressDialog.dismiss()
@@ -112,6 +121,18 @@ class DetailTripActivity : AppCompatActivity(), AdapterDetail.OnDataChangeListen
     private fun updateTotalItemsTextView() {
         val totalItems = adapter.itemCount
         binding.tvTotal.text = "Total items: $totalItems"
+    }
+
+    private fun getDuration(startDate: String, finishDate: String): Int {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+        val startDateObj = sdf.parse(startDate)
+        val finishDateObj = sdf.parse(finishDate)
+
+        // Calculate the difference in milliseconds
+        val diffInMillis = finishDateObj.time - startDateObj.time
+
+        // Convert milliseconds to days
+        return (diffInMillis / (1000 * 60 * 60 * 24)).toInt()
     }
 
     override fun onDataChanged() {

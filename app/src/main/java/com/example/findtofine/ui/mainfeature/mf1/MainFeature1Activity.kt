@@ -93,9 +93,7 @@ class MainFeature1Activity : AppCompatActivity() {
             if (currentPhotoPath == null && selectedImageUri == null) {
                 Toast.makeText(this@MainFeature1Activity, "Please take a photo or select from gallery first", Toast.LENGTH_SHORT).show()
             } else {
-                lifecycleScope.launch {
-                    uploadTask()
-                }
+                showConfirmationDialog()
             }
         }
 
@@ -115,6 +113,23 @@ class MainFeature1Activity : AppCompatActivity() {
             imageSource = ImageSource.ADD_ITEMS
             showPictureDialog()
         }
+    }
+
+    private fun showConfirmationDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Confirm Your Data")
+            .setMessage("Are You Sure The Data Is Correct?")
+            .setNegativeButton("Cancel") { dialog, which ->
+                // Respond to negative button press
+                dialog.dismiss()
+            }
+            .setPositiveButton("Yes") { dialog, which ->
+                // Respond to positive button press
+                lifecycleScope.launch {
+                    uploadTask()
+                }
+            }
+            .show()
     }
 
     private fun showDatePickerDialog(editText: EditText) {
@@ -408,7 +423,7 @@ class MainFeature1Activity : AppCompatActivity() {
                 progressDialog.dismiss()
                 showCustomNotif()
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@MainFeature1Activity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainFeature1Activity, "Success to upload task", Toast.LENGTH_SHORT).show()
                 }
 
             }

@@ -108,6 +108,14 @@ class HomeFragment : Fragment() {
                     adapter.updateData(items.filter { it.status == "false" })
                     binding.tvTotalItemScan.text = adapter.totalItems.toString()
                     binding.tvCompletedTrips.text = completedTasksCount.toString()
+
+                    if(adapter.itemCount == 0){
+                        binding.ivDefaultImage.visibility = View.VISIBLE
+                        binding.tvDefaultText.visibility = View.VISIBLE
+                    } else {
+                        binding.ivDefaultImage.visibility = View.GONE
+                        binding.tvDefaultText.visibility = View.GONE
+                    }
                 }
             } catch (e: Exception) {
                 progressDialog.dismiss()

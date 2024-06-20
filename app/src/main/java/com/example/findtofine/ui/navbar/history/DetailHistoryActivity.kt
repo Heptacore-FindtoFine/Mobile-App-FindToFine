@@ -20,6 +20,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class DetailHistoryActivity : AppCompatActivity() {
 
@@ -52,6 +54,13 @@ class DetailHistoryActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     taskDetail = response
                     updateUI(response)
+
+                    val startDate = taskDetail!!.startDate ?: ""
+                    val finishDate = taskDetail!!.finishDate ?: ""
+
+                    val duaration = getDuration(startDate,finishDate)
+
+                    binding.tvDuration.text = "Duration : $duaration Days"
                 }
             } catch (e: Exception) {
                 e.printStackTrace() // Handle the error
@@ -90,6 +99,18 @@ class DetailHistoryActivity : AppCompatActivity() {
 
             tableLayout.addView(rowBinding.root)
         }
+    }
+
+    private fun getDuration(startDate: String, finishDate: String): Int {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+        val startDateObj = sdf.parse(startDate)
+        val finishDateObj = sdf.parse(finishDate)
+
+        // Calculate the difference in milliseconds
+        val diffInMillis = finishDateObj.time - startDateObj.time
+
+        // Convert milliseconds to days
+        return (diffInMillis / (1000 * 60 * 60 * 24)).toInt()
     }
 
     override fun onSupportNavigateUp(): Boolean {
